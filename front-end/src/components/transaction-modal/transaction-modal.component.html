@@ -1,0 +1,103 @@
+<div class="modal-overlay" *ngIf="visible" (click)="onClose()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Nova Transação</h2>
+      <button class="close-button" (click)="onClose()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit()" #transactionForm="ngForm">
+        <div class="form-group">
+          <label for="user">Usuário</label>
+          <select 
+            id="user" 
+            name="userId" 
+            [(ngModel)]="transaction.userId" 
+            (change)="onUserChange()" 
+            required>
+            <option value="" disabled selected>Selecione um usuário</option>
+            <option *ngFor="let user of users" [value]="user.id">
+              {{ user.name }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="account">Conta</label>
+          <select 
+            id="account" 
+            name="accountId" 
+            [(ngModel)]="transaction.accountId" 
+            required
+            [disabled]="!transaction.userId">
+            <option value="" disabled selected>Selecione uma conta</option>
+            <option *ngFor="let account of userAccounts" [value]="account.id">
+              {{ account.name }} - {{ account.number }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="type">Tipo de Transação</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input 
+                type="radio" 
+                name="type" 
+                value="debit" 
+                [(ngModel)]="transaction.type">
+              Débito
+            </label>
+            <label class="radio-label">
+              <input 
+                type="radio" 
+                name="type" 
+                value="credit" 
+                [(ngModel)]="transaction.type">
+              Crédito
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="amount">Valor</label>
+          <input 
+            type="number" 
+            id="amount" 
+            name="amount" 
+            [(ngModel)]="transaction.amount" 
+            min="0.01" 
+            step="0.01" 
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Descrição</label>
+          <input 
+            type="text" 
+            id="description" 
+            name="description" 
+            [(ngModel)]="transaction.description" 
+            required>
+        </div>
+        
+        <div class="form-actions">
+          <button 
+            type="button" 
+            class="btn-cancel" 
+            (click)="onClose()">
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="btn-submit" 
+            [disabled]="!transactionForm.form.valid">
+            Confirmar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

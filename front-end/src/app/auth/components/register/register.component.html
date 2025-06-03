@@ -1,0 +1,153 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Criar Conta</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="fullName">Nome Completo</label>
+        <input
+          type="text"
+          id="fullName"
+          formControlName="fullName"
+          placeholder="Digite seu nome completo"
+          [class.is-invalid]="
+            registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched"
+        >
+          <span *ngIf="registerForm.get('fullName')?.errors?.['required']"
+            >O nome completo é obrigatório</span
+          >
+          <span *ngIf="registerForm.get('fullName')?.errors?.['minlength']"
+            >O nome completo deve ter pelo menos 3 caracteres</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Digite seu endereço de email"
+          [class.is-invalid]="
+            registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+        >
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">O email é obrigatório</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']"
+            >Por favor, insira um email válido</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth">Data de Nascimento</label>
+        <input
+          type="date"
+          id="dateOfBirth"
+          formControlName="dateOfBirth"
+          [class.is-invalid]="
+            registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched
+          "
+        >
+          <span *ngIf="registerForm.get('dateOfBirth')?.errors?.['required']"
+            >A data de nascimento é obrigatória</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Crie uma senha"
+          [class.is-invalid]="
+            registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+          "
+        />
+        <div class="password-strength" *ngIf="registerForm.get('password')?.value">
+          Força da Senha: {{ getPasswordStrength() }}
+        </div>
+        <div
+          class="error-message"
+          *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+        >
+          <span *ngIf="registerForm.get('password')?.errors?.['required']"
+            >A senha é obrigatória</span
+          >
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']"
+            >A senha deve ter pelo menos 8 caracteres</span
+          >
+          <span *ngIf="registerForm.get('password')?.errors?.['pattern']">
+            A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um
+            caractere especial
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar Senha</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirme sua senha"
+          [class.is-invalid]="
+            registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
+        >
+          As senhas não coincidem
+        </div>
+      </div>
+
+      <div class="form-group checkbox">
+        <label>
+          <input type="checkbox" formControlName="termsAccepted" />
+          Eu concordo com os Termos de Uso
+        </label>
+        <div
+          class="error-message"
+          *ngIf="
+            registerForm.get('termsAccepted')?.invalid && registerForm.get('termsAccepted')?.touched
+          "
+        >
+          Você deve aceitar os termos para continuar
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid || isLoading">
+        <span *ngIf="!isLoading">Criar Conta</span>
+        <span *ngIf="isLoading">Criando Conta...</span>
+      </button>
+
+      <div class="form-links">
+        <span>Já tem uma conta? </span>
+        <a routerLink="/auth/login">Entre aqui</a>
+      </div>
+    </form>
+  </div>
+</div>

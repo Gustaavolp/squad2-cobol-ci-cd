@@ -1,0 +1,15 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  min-height: calc(100vh - 64px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: 16px;
+    min-height: calc(100vh - 56px);
+  }
+}

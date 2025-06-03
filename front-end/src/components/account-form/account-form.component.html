@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Nova Conta</h2>
+<mat-dialog-content>
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Título da Conta (Opcional)</mat-label>
+      <input matInput formControlName="title" placeholder="Ex: Conta Principal" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de Conta</mat-label>
+      <mat-select formControlName="type" required>
+        <mat-option *ngFor="let type of accountTypes" [value]="type">
+          {{ type === 'CHECKING' ? 'Corrente' : 'Poupança' }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="accountForm.get('type')?.hasError('required')">
+        Tipo de conta é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Saldo Inicial (Opcional)</mat-label>
+      <input matInput type="number" formControlName="balance" placeholder="Ex: 100.50" />
+      <mat-error *ngIf="accountForm.get('balance')?.hasError('pattern')">
+        Saldo deve ser um número válido.
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="isLoading">Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+    [disabled]="isLoading || accountForm.invalid"
+  >
+    {{ isLoading ? 'Salvando...' : 'Salvar' }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,26 @@
+.align-content{
+      display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.customer-list-container {
+  padding: 20px;
+  max-width: 100vw;
+  width: 60%;
+
+  .actions {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  table {
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .ml-2 {
+    margin-left: 8px;
+  }
+}

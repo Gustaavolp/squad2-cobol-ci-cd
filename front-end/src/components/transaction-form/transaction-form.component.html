@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Valor</mat-label>
+      <input matInput type="number" formControlName="amount" placeholder="Ex: 50.00" required />
+      <span matTextPrefix>R$&nbsp;</span>
+      <mat-error *ngIf="transactionForm.get('amount')?.hasError('required')">
+        Valor é obrigatório.
+      </mat-error>
+      <mat-error *ngIf="transactionForm.get('amount')?.hasError('pattern')">
+        Valor deve ser um número.
+      </mat-error>
+      <mat-error *ngIf="transactionForm.get('amount')?.hasError('min')">
+        Valor deve ser maior que zero.
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="isLoading">Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+    [disabled]="isLoading || transactionForm.invalid"
+  >
+    {{
+      isLoading ? 'Processando...' : data.transactionType === 'DEPOSIT' ? 'Depositar' : 'Retirar'
+    }}
+  </button>
+</mat-dialog-actions>

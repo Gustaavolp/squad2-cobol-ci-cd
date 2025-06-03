@@ -1,0 +1,89 @@
+@use '@angular/material' as mat;
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+// Variáveis globais de estilo
+$primary-color: #0050ef;
+$secondary-color: #4dabff;
+$dark-color: #002766;
+$light-color: #f8f9fa;
+$warning-color: #ff9800;
+$text-dark: #333;
+$text-light: #666;
+$border-radius: 15px;
+$box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease;
+
+// Variáveis para valores positivos e negativos
+$positive-color: #059669;
+$negative-color: #dc2626;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+} /* You can add global styles to this file, and also import other style files */
+
+/* Estilos para os SnackBars */
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Estilos para campos inválidos */
+.mat-form-field.ng-invalid.ng-touched .mat-form-field-outline {
+  color: #f44336;
+}
+
+/* Estilos para campos válidos */
+.mat-form-field.ng-valid .mat-form-field-outline {
+  color: #4caf50;
+
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  background-color: #000;
+}
+
+// Animações globais
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+}

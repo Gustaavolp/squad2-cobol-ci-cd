@@ -1,0 +1,16 @@
+@import '../login/login.component.scss';
+
+.password-strength {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  color: #666;
+}
+
+.form-group {
+  input[type="date"] {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+}

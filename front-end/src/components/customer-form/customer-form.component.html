@@ -1,0 +1,67 @@
+<div class="customer-form-container">
+  <h2>{{ isUpdateMode ? 'Atualizar Cliente' : 'Cadastrar Novo Cliente' }}</h2>
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="customer-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput formControlName="name" placeholder="Digite o nome completo" />
+      <mat-error *ngIf="customerForm.get('name')?.invalid && customerForm.get('name')?.touched">
+        {{ getErrorMessage('name') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Data de Nascimento</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="birthdate"
+        placeholder="DD/MM/AAAA"
+        appDateInputMask
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error
+        *ngIf="customerForm.get('birthdate')?.invalid && customerForm.get('birthdate')?.touched"
+      >
+        {{ getErrorMessage('birthdate') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" placeholder="exemplo@email.com" type="email" />
+      <mat-error *ngIf="customerForm.get('email')?.invalid && customerForm.get('email')?.touched">
+        {{ getErrorMessage('email') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Senha</mat-label>
+      <input matInput formControlName="password" placeholder="Digite a senha" type="password" />
+      <mat-error
+        *ngIf="customerForm.get('password')?.invalid && customerForm.get('password')?.touched"
+      >
+        {{ getErrorMessage('password') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tipo de Usuário</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="USER">Usuário</mat-option>
+        <mat-option value="ADMIN">Administrador</mat-option>
+      </mat-select>
+      <mat-error *ngIf="customerForm.get('role')?.invalid && customerForm.get('role')?.touched">
+        {{ getErrorMessage('role') }}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-button type="button" routerLink="/list/customer">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="customerForm.invalid">
+        {{ isUpdateMode ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+    </div>
+  </form>
+</div>

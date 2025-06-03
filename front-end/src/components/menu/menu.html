@@ -1,0 +1,19 @@
+<button class="menu-toggle" (click)="toggleSidebar()">
+  <span class="material-icons">menu</span>
+</button>
+
+<nav class="sidebar" [class.active]="sidebarActive">
+  <div class="sidebar-header">
+    <h3>Acesso Rápido</h3>
+    <button class="close-sidebar" (click)="toggleSidebar()">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+  <div class="nav-cards">
+    <a class="nav-card" href="/home">Home</a>
+    <a class="nav-card" href="/list/customer">Gerenciar Usuarios</a>
+    <a class="nav-card" href="#" (click)="openTransactionModal($event)">Nova Transação</a>
+    <a class="nav-card" href="/report">Relatório</a>
+    <a class="nav-card" href="#">Logout</a>
+  </div>
+</nav>

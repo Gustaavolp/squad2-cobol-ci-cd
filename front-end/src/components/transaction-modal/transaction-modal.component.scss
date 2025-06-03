@@ -1,0 +1,144 @@
+@import '../../styles.scss';
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-container {
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideInRight 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba($secondary-color, 0.2);
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: $dark-color;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: $text-light;
+  cursor: pointer;
+  transition: $transition;
+}
+
+.close-button:hover {
+  color: $text-dark;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: $text-dark;
+  font-weight: 500;
+}
+
+select, input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid rgba($secondary-color, 0.3);
+  border-radius: $border-radius;
+  font-size: 1rem;
+  color: $text-dark;
+  background-color: white;
+  transition: $transition;
+  box-sizing: border-box;
+}
+
+select:focus, input[type="text"]:focus, input[type="number"]:focus {
+  outline: none;
+  border-color: $primary-color;
+  box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+}
+
+select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio-label input {
+  margin-right: 8px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-cancel, .btn-submit {
+  padding: 10px 20px;
+  border: none;
+  border-radius: $border-radius;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition;
+}
+
+.btn-cancel {
+  background-color: #f5f5f5;
+  color: $text-dark;
+}
+
+.btn-submit {
+  background-color: $primary-color;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-submit:hover {
+  background-color: $secondary-color;
+}
+
+.btn-submit:disabled {
+  background-color: rgba($primary-color, 0.5);
+  cursor: not-allowed;
+}

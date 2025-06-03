@@ -1,0 +1,145 @@
+@import '../../styles.scss';
+
+.sidebar {
+  width: 220px;
+  background-color: $dark-color;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: $transition;
+  z-index: 1000;
+  border-radius: 0 $border-radius $border-radius 0;
+  height: 100%;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar h3 {
+  margin: 0;
+}
+
+.close-sidebar {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-card {
+  color: #fff;
+  font-weight: 500;
+  background-color: $primary-color;
+  padding: 12px;
+  border-radius: $border-radius;
+  text-align: center;
+  transition: $transition;
+  animation: fadeIn 0.5s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.nav-card a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-card:hover {
+  background-color: $secondary-color;
+  cursor: pointer;
+  transform: translateY(-3px);
+}
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  box-shadow: $box-shadow;
+  transition: $transition;
+}
+
+.menu-toggle:hover {
+  background-color: $secondary-color;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    transform: translateX(-100%);
+    width: 80%;
+    max-width: 300px;
+    transition: $transition;
+    border-radius: 0;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+    box-shadow: $box-shadow;
+    animation: slideInLeft 0.3s ease;
+  }
+
+  .overlay {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .overlay:has(+ .main-content:has(+ .sidebar.active)),
+  .sidebar.active + .overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .menu-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .close-sidebar {
+    display: block;
+  }
+}

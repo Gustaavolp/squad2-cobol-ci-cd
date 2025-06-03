@@ -1,0 +1,49 @@
+.customer-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+}
+
+.customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: -12px;
+  margin-bottom: 12px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .customer-form-container {
+    padding: 16px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,93 @@
+<div class="dashboard">
+  <app-menu (newTransaction)="openTransactionModal()"></app-menu>
+  
+  <main class="main-content">
+    <!-- Seção de cartões de resumo -->
+    <section class="cards-section">
+      <div class="card" *ngFor="let cartao of cartoes">
+        <div class="card-icon">
+          <span class="material-icons">{{ cartao.icone }}</span>
+        </div>
+        <div class="card-content">
+          <h3>{{ cartao.titulo }}</h3>
+          <p [class]="getClasseValor(cartao.valor)">{{ formatarMoeda(cartao.valor) }}</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions-bar">
+      <button class="action-button" (click)="openTransactionModal()">
+        <span class="material-icons">add_circle</span>
+        Nova Transação
+      </button>
+    </div>
+
+    <section class="balance-section">
+      <h2>Saldo Atual</h2>
+      <div *ngIf="carregandoSaldo" class="loading">Carregando...</div>
+      <div *ngIf="!carregandoSaldo" class="balance-amount">{{ formatarMoeda(saldo) }}</div>
+    </section>
+
+    <section class="chart-section">
+      <h2>Gastos por Categoria</h2>
+      <div *ngIf="carregandoGrafico" class="loading">Carregando gráfico...</div>
+      <div *ngIf="!carregandoGrafico" class="chart-container">
+        <div class="chart-placeholder">
+          <div *ngFor="let item of dadosGrafico" class="chart-bar">
+            <div class="bar-label">{{ item.categoria }}</div>
+            <div class="bar" [style.width.%]="(item.valor / 1500) * 100"></div>
+            <div class="bar-value">{{ formatarMoeda(item.valor) }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="goals-section">
+      <h2>Metas Financeiras</h2>
+      <div class="goals-container">
+        <div *ngFor="let meta of metas" class="goal-card">
+          <h3>{{ meta.descricao }}</h3>
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="meta.percentual"></div>
+          </div>
+          <div class="goal-details">
+            <span>{{ formatarMoeda(meta.valorAtual) }} de {{ formatarMoeda(meta.valorMeta) }}</span>
+            <span>{{ meta.percentual }}%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="transactions-section">
+      <h2>Últimas Transações</h2>
+      <div *ngIf="carregandoTransacoes" class="loading">Carregando transações...</div>
+      <div class="table-responsive" *ngIf="!carregandoTransacoes">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transacao of transacoes">
+              <td>{{ transacao.data }}</td>
+              <td>{{ transacao.descricao }}</td>
+              <td [class]="getClasseValor(transacao.valor)">{{ formatarMoeda(transacao.valor) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de Transação -->
+  <app-transaction-modal
+    [visible]="showTransactionModal"
+    [users]="users"
+    [accounts]="accounts"
+    (close)="closeTransactionModal()"
+    (submit)="handleTransactionSubmit($event)">
+  </app-transaction-modal>
+</div>
